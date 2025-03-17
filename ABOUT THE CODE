@@ -1,0 +1,108 @@
+    1. Flask Backend
+This is your server-side Python code using the Flask framework:
+
+RISCAssembler Class: The core of your application that translates assembly code to machine code
+
+register_map: Maps register names (r0-r15) to their 4-bit binary representations
+opcode_map: Maps instruction names (add, sub, etc.) to their 5-bit binary opcodes
+tokenize(): Breaks assembly code lines into individual tokens for parsing
+parse(): Analyzes tokens and converts them to structured instruction objects
+generate_machine_code(): Converts parsed instructions into 30-bit binary machine code
+assemble(): Main function that processes assembly code and returns machine code or errors
+
+
+Flask Routes:
+
+/api/assemble: POST endpoint that receives assembly code and returns machine code
+/: Root route that serves the index.html page
+
+
+
+This backend processes different instruction types:
+
+Arithmetic/logical operations (add, sub, mul, etc.)
+Memory operations (ld, st)
+Branch operations (beq, bgt, b, call)
+Special operations (ret, nop)
+
+    2. HTML Frontend
+This defines the structure and content of your web interface:
+
+Header: Title and description of the RISC Assembler
+Main Content: Split into two primary sections:
+
+Editor Container:
+
+Input section for assembly code with textarea
+Example code section with load button
+Control buttons (Assemble, Clear All)
+Output section to display machine code results
+
+
+Info Panel: A tabbed interface containing:
+
+Instructions tab: Lists supported assembly instructions
+Registers tab: Shows register names and their binary values
+Opcodes tab: Tables of operation codes
+
+
+
+
+Footer: Basic information about the application
+
+The HTML provides both the interface for users to interact with your assembler and reference information they might need while writing assembly code.
+    3. CSS Styling
+This provides the visual styling for your application:
+
+Color Variables: Defined at the top to maintain a consistent color scheme
+Basic Layout: Sets up the page structure, font choices, and spacing
+Editor Styling: Formats the code input and output areas
+Buttons: Styles for interactive elements with hover effects
+Tabs Interface: CSS for the tabbed information panel
+Tables and Lists: Formatting for the reference information
+Responsive Design: Media queries to adjust layout on smaller screens
+
+The CSS creates a clean, professional interface with a color scheme based around blue and dark gray tones, making the code areas stand out against the lighter background.
+    4. JavaScript
+This handles the client-side interactivity:
+
+DOM Element Selection: Gets references to all the interactive elements
+Event Listeners: Sets up click handlers for buttons and tabs
+assembleCode():
+
+Collects code from the input textarea
+Sends it to the backend using fetch API
+Processes the response
+Updates the UI with machine code or errors
+
+
+displayOutput(): Shows results or error messages
+clearAll(): Resets the input and output areas
+loadExample(): Fills the input area with example code
+Keyboard Shortcuts: Ctrl+Enter to assemble
+
+The JavaScript connects your user interface to the backend, handling all user interactions and API communication.
+How They Work Together
+
+    ---> When a user enters assembly code and clicks "Assemble":
+
+The JavaScript captures the code and sends it to /api/assemble
+The Flask backend receives the request and passes it to the RISCAssembler
+The assembler processes the code through multiple steps (tokenize, parse, generate machine code)
+The results are sent back as JSON
+JavaScript updates the page to show the results
+
+
+The assembler follows this pipeline:
+
+Tokenization: Breaks code into meaningful parts
+Parsing: Structures tokens into instruction objects
+Code generation: Converts instructions to binary
+
+
+The user interface makes it easy to:
+
+Write and edit assembly code
+Reference instruction formats, register codes, and opcodes
+See immediate feedback when code is assembled
+Handle errors when they occur
