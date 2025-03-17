@@ -2,14 +2,15 @@
 SimpleRISC ASSEMBLER (GUI  MODEL)
 
 --> proper folder structure :
-
-RISC_ASSEMBLER (ROOT FOLDER)
-└── app.py
-└── static\
-    ├── style.css
-    └── script.js
-└── templates\
-    └── index.html
+-------------------------------------------------
+--> RISC_ASSEMBLER\ (ROOT FOLDER)
+        app.py
+        static\
+            style.css
+            script.js
+        templates\
+            index.html
+-------------------------------------------------
 
 --> THIS WEBSITE WILL ONLY WORKS IN YOUR NEGATIVE COMPUTER (WHY):
 
