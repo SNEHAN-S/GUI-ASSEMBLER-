@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISC Assembler</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RISC Assembler</h1>
+            <p>Enter your assembly code and convert it to machine code</p>
+        </header>
+        
+        <main>
+            <div class="editor-container">
+                <div class="input-section">
+                    <h2>Assembly Code</h2>
+                    <textarea id="assembly-input" placeholder="Enter your assembly code here..."></textarea>
+                    <div class="example-section">
+                        <h3>Example Code:</h3>
+                        <pre id="example-code">add r1, r2, r3
+sub r4, r5, 0x10
+ld r1, 0x2000
+st r2, 0x2004
+beq 10
+ret</pre>
+                        <button id="load-example">Load Example</button>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button id="assemble-btn">Assemble &rarr;</button>
+                    <button id="clear-btn">Clear All</button>
+                </div>
+                
+                <div class="output-section">
+                    <h2>Machine Code</h2>
+                    <div id="machine-output" class="code-output"></div>
+                </div>
+            </div>
+            
+            <div class="info-panel">
+                <div class="tabs">
+                    <button class="tab-btn active" data-target="instructions">Instructions</button>
+                    <button class="tab-btn" data-target="registers">Registers</button>
+                    <button class="tab-btn" data-target="opcodes">Opcodes</button>
+                </div>
+                
+                <div id="instructions" class="tab-content active">
+                    <h3>Supported Instructions</h3>
+                    <ul>
+                        <li><code>add rd, rs1, rs2/imm</code> - Add registers or immediate</li>
+                        <li><code>sub rd, rs1, rs2/imm</code> - Subtract registers or immediate</li>
+                        <li><code>mul rd, rs1, rs2/imm</code> - Multiply registers or immediate</li>
+                        <li><code>div rd, rs1, rs2/imm</code> - Divide registers or immediate</li>
+                        <li><code>mod rd, rs1, rs2/imm</code> - Modulo operation</li>
+                        <li><code>and rd, rs1, rs2/imm</code> - Logical AND</li>
+                        <li><code>or rd, rs1, rs2/imm</code> - Logical OR</li>
+                        <li><code>ld rd, address</code> - Load from memory</li>
+                        <li><code>st rd, address</code> - Store to memory</li>
+                        <li><code>beq offset</code> - Branch if equal</li>
+                        <li><code>bgt offset</code> - Branch if greater than</li>
+                        <li><code>b offset</code> - Unconditional branch</li>
+                        <li><code>call offset</code> - Call subroutine</li>
+                        <li><code>ret</code> - Return from subroutine</li>
+                        <li><code>nop</code> - No operation</li>
+                    </ul>
+                </div>
+                
+                <div id="registers" class="tab-content">
+                    <h3>Registers</h3>
+                    <table>
+                        <tr>
+                            <th>Register</th>
+                            <th>Binary</th>
+                            <th>Register</th>
+                            <th>Binary</th>
+                        </tr>
+                        <tr>
+                            <td>r0</td>
+                            <td>0000</td>
+                            <td>r8</td>
+                            <td>1000</td>
+                        </tr>
+                        <tr>
+                            <td>r1</td>
+                            <td>0001</td>
+                            <td>r9</td>
+                            <td>1001</td>
+                        </tr>
+                        <tr>
+                            <td>r2</td>
+                            <td>0010</td>
+                            <td>r10</td>
+                            <td>1010</td>
+                        </tr>
+                        <tr>
+                            <td>r3</td>
+                            <td>0011</td>
+                            <td>r11</td>
+                            <td>1011</td>
+                        </tr>
+                        <tr>
+                            <td>r4</td>
+                            <td>0100</td>
+                            <td>r12</td>
+                            <td>1100</td>
+                        </tr>
+                        <tr>
+                            <td>r5</td>
+                            <td>0101</td>
+                            <td>r13</td>
+                            <td>1101</td>
+                        </tr>
+                        <tr>
+                            <td>r6</td>
+                            <td>0110</td>
+                            <td>r14</td>
+                            <td>1110</td>
+                        </tr>
+                        <tr>
+                            <td>r7</td>
+                            <td>0111</td>
+                            <td>r15</td>
+                            <td>1111</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div id="opcodes" class="tab-content">
+                    <h3>Operation Codes</h3>
+                    <table>
+                        <tr>
+                            <th>Operation</th>
+                            <th>Opcode</th>
+                            <th>Operation</th>
+                            <th>Opcode</th>
+                        </tr>
+                        <tr>
+                            <td>add</td>
+                            <td>00000</td>
+                            <td>ld</td>
+                            <td>01011</td>
+                        </tr>
+                        <tr>
+                            <td>sub</td>
+                            <td>00001</td>
+                            <td>st</td>
+                            <td>01100</td>
+                        </tr>
+                        <tr>
+                            <td>mul</td>
+                            <td>00010</td>
+                            <td>cmp</td>
+                            <td>01101</td>
+                        </tr>
+                        <tr>
+                            <td>div</td>
+                            <td>00011</td>
+                            <td>mov</td>
+                            <td>01110</td>
+                        </tr>
+                        <tr>
+                            <td>mod</td>
+                            <td>00100</td>
+                            <td>beq</td>
+                            <td>01111</td>
+                        </tr>
+                        <tr>
+                            <td>and</td>
+                            <td>00101</td>
+                            <td>bgt</td>
+                            <td>10000</td>
+                        </tr>
+                        <tr>
+                            <td>or</td>
+                            <td>00110</td>
+                            <td>b</td>
+                            <td>10001</td>
+                        </tr>
+                        <tr>
+                            <td>not</td>
+                            <td>00111</td>
+                            <td>call</td>
+                            <td>10010</td>
+                        </tr>
+                        <tr>
+                            <td>lsl</td>
+                            <td>01000</td>
+                            <td>ret</td>
+                            <td>10011</td>
+                        </tr>
+                        <tr>
+                            <td>lsr</td>
+                            <td>01001</td>
+                            <td>nop</td>
+                            <td>10100</td>
+                        </tr>
+                        <tr>
+                            <td>asr</td>
+                            <td>01010</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>RISC Assembler Web Interface - Convert assembly language to machine code for a simple RISC architecture</p>
+        </footer>
+    </div>
+    
+    <script src="/static/script.js"></script>
+</body>
+</html>
