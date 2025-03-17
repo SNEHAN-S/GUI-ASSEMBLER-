@@ -1,5 +1,5 @@
     1. Flask Backend
-This is your server-side Python code using the Flask framework:
+This is our server-side Python code using the Flask framework:
 
 RISCAssembler Class: The core of your application that translates assembly code to machine code
 
